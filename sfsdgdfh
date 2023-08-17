@@ -1,0 +1,145 @@
+<div class="section-adoption">
+                <div class="adoption-1">
+                    <img class="imagen-1" src="imagenes/beagle.jpg" alt="perro">
+                    <h2>APOLO</h2>
+                    <ul>
+                        <li>Raza:Criollo</li>
+                        <li>Edad:5 años</li>
+                        <li>Esterilizado:Si</li>
+                        <li>Vacunas:Si</li>
+                        <li>Ubicación:Soacha</li>
+                        <li>Cuidados especiales:Ninguno</li>
+                    </ul>
+                    <a href="apolo.html" target="_blank"><button id="adoptar">ADOPTAR</button></a>
+                </div>
+                <div class="adoption-2">
+                    <img class="imagen-2" src="imagenes/beagle.jpg" alt="perro">
+                    <h2>APOLO</h2>
+                    <ul>
+                        <li>Raza:Criollo</li>
+                        <li>Edad:5 años</li>
+                        <li>Esterilizado:Si</li>
+                        <li>Vacunas:Si</li>
+                        <li>Ubicación:Soacha</li>
+                        <li>Cuidados especiales:Ninguno</li>
+                    </ul>
+                    <button>ADOPTAR</button>
+                </div>
+                <div class="adoption-3">
+                    <img class="imagen-3" src="imagenes/beagle.jpg" alt="perro">
+                    <h2>APOLO</h2>
+                    <ul>
+                        <li>Raza:Criollo</li>
+                        <li>Edad:5 años</li>
+                        <li>Esterilizado:Si</li>
+                        <li>Vacunas:Si</li>
+                        <li>Ubicación:Soacha</li>
+                        <li>Cuidados especiales:Ninguno</li>
+                    </ul>
+                    <button>ADOPTAR</button>
+                </div>
+                <div class="adoption-4">
+                    <img class="imagen-4" src="imagenes/beagle.jpg" alt="perro">
+                    <h2>APOLO</h2>
+                    <ul>
+                        <li>Raza:Criollo</li>
+                        <li>Edad:5 años</li>
+                        <li>Esterilizado:Si</li>
+                        <li>Vacunas:Si</li>
+                        <li>Ubicación:Soacha</li>
+                        <li>Cuidados especiales:Ninguno</li>
+                    </ul>
+                    <button>ADOPTAR</button>
+                </div>
+                <div class="adoption-5">
+                    <img class="imagen-5" src="imagenes/beagle.jpg" alt="perro">
+                    <h2>APOLO</h2>
+                    <ul>
+                        <li>Raza:Criollo</li>
+                        <li>Edad:5 años</li>
+                        <li>Esterilizado:Si</li>
+                        <li>Vacunas:Si</li>
+                        <li>Ubicación:Soacha</li>
+                        <li>Cuidados especiales:Ninguno</li>
+                    </ul>
+                    <button>ADOPTAR</button>
+                </div>
+                <div class="adoption-6">
+                    <img class="imagen-6" src="imagenes/beagle.jpg" alt="perro">
+                    <h2>APOLO</h2>
+                    <ul>
+                        <li>Raza:Criollo</li>
+                        <li>Edad:5 años</li>
+                        <li>Esterilizado:Si</li>
+                        <li>Vacunas:Si</li>
+                        <li>Ubicación:Soacha</li>
+                        <li>Cuidados especiales:Ninguno</li>
+                    </ul>
+                    <button>ADOPTAR</button>
+                </div>
+            </div>
+            <div class="adoption-2">
+                <img class="imagen-2" src="imagenes/beagle.jpg" alt="perro">
+                <h2>APOLO</h2>
+                <ul>
+                    <li>Raza:Criollo</li>
+                    <li>Edad:5 años</li>
+                    <li>Esterilizado:Si</li>
+                    <li>Vacunas:Si</li>
+                    <li>Ubicación:Soacha</li>
+                    <li>Cuidados especiales:Ninguno</li>
+                </ul>
+                <button>ADOPTAR</button>
+            </div>
+            <div class="adoption-3">
+                <img class="imagen-3" src="imagenes/beagle.jpg" alt="perro">
+                <h2>APOLO</h2>
+                <ul>
+                    <li>Raza:Criollo</li>
+                    <li>Edad:5 años</li>
+                    <li>Esterilizado:Si</li>
+                    <li>Vacunas:Si</li>
+                    <li>Ubicación:Soacha</li>
+                    <li>Cuidados especiales:Ninguno</li>
+                </ul>
+                <button>ADOPTAR</button>
+            </div>
+            <div class="adoption-4">
+                <img class="imagen-4" src="imagenes/beagle.jpg" alt="perro">
+                <h2>APOLO</h2>
+                <ul>
+                    <li>Raza:Criollo</li>
+                    <li>Edad:5 años</li>
+                    <li>Esterilizado:Si</li>
+                    <li>Vacunas:Si</li>
+                    <li>Ubicación:Soacha</li>
+                    <li>Cuidados especiales:Ninguno</li>
+                </ul>
+                <button>ADOPTAR</button>
+            </div>
+            <div class="adoption-5">
+                <img class="imagen-5" src="imagenes/beagle.jpg" alt="perro">
+                <h2>APOLO</h2>
+                <ul>
+                    <li>Raza:Criollo</li>
+                    <li>Edad:5 años</li>
+                    <li>Esterilizado:Si</li>
+                    <li>Vacunas:Si</li>
+                    <li>Ubicación:Soacha</li>
+                    <li>Cuidados especiales:Ninguno</li>
+                </ul>
+                <button>ADOPTAR</button>
+            </div>
+            <div class="adoption-6">
+                <img class="imagen-6" src="imagenes/beagle.jpg" alt="perro">
+                <h2>APOLO</h2>
+                <ul>
+                    <li>Raza:Criollo</li>
+                    <li>Edad:5 años</li>
+                    <li>Esterilizado:Si</li>
+                    <li>Vacunas:Si</li>
+                    <li>Ubicación:Soacha</li>
+                    <li>Cuidados especiales:Ninguno</li>
+                </ul>
+                <button>ADOPTAR</button>
+            </div>
