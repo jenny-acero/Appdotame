@@ -1,0 +1,103 @@
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <title>Adoptar</title>
+    <link rel="icon" type="image/png" href="imagenes-pincipales/APPDOTAME-favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="javascript.js"></script>
+</head>
+    <body>
+        <div class="contactar-container">
+            <div>Solicitud de Adopción</div>
+            <form class="form">
+                <label for="nombre">Nombre de la mascota:</label>
+                <input type="text" id="nombre-mascota" name="nombre-mascota" required>
+                
+                <div>Nos gustaría saber acerca de ti</div>
+                
+                <label for="nombre">Nombre del responsable de la adopción:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="edad">Edad</label>
+                <input type="number" id="nombre" name="nombre" min="18" required>
+                
+                <label for="ciudad">Ciudad:</label>
+                <select name="ciudad" required>
+                    <option value="bogota">Bogota</option>
+                    <option value="cali">Cali</option>
+                    <option value="medellin">Medellin</option>
+                </select>
+
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="ciudad" name="ciudad" required>
+
+                <label for="barrio">Barrio:</label>
+                <input type="text" id="barrio" name="barrio" required>
+
+                <label for="telefono">Número de Telefono:</label>
+                <input type="number" id="telefono" name="telefono" pattern="[+]57[0-9]+" placeholder="+57" required>
+
+                <label for="email">Correo Electronico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <div>Cuentanos sobre tu familia</div>
+                
+                <label for="numero">Número de miembros de tu familia:</label>
+                <input type="number" id="numero" name="numero" required>
+
+                <label for="edades">Edades:</label>
+                <input type="text" id="edades" name="edades" required>
+
+                <label>Todos los integrantes de tu familia estan enterados de la intención de adopción</label>
+                <input type="radio" id="si1" name="pregunta1" value="si">
+                <label for="si1">Sí</label>
+                <input type="radio" id="no1" name="pregunta1" value="no">
+                <label for="no1">No</label>
+
+                <label>Estan de acuerdo?:</label>
+                <input type="radio" id="si1" name="pregunta1" value="si">
+                <label for="si1">Sí</label>
+                <input type="radio" id="no1" name="pregunta1" value="no">
+                <label for="no1">No</label>
+                <label>¿Porque?:</label>
+                <input type="text" id="campo-adicional" name="campo-adicional">
+                
+                <label>¿Alguien con alergías?:</label>
+                <input type="radio" id="si1" name="pregunta1" value="si">
+                <label for="si1">Sí</label>
+                <input type="radio" id="no1" name="pregunta1" value="no">
+                <label for="no1">No</label>
+
+                <label>Con anterioridad, ¿has tenido mascotas?:</label>
+                <input type="radio" id="si1" name="pregunta1" value="si">
+                <label for="si1">Sí</label>
+                <input type="radio" id="no1" name="pregunta1" value="no">
+                <label for="no1">No</label>
+
+                <label for="mensaje">¿Porque ya no estan contigo?:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+
+                <label>Actualmente, ¿Tienes otras mascotas?:</label>
+                <input type="radio" id="si1" name="pregunta1" value="si">
+                <label for="si1">Sí</label>
+                <input type="radio" id="no1" name="pregunta1" value="no">
+                <label for="no1">No</label>
+                <label>¿Cuales son?:</label>
+                <input type="text" id="campo-adicional" name="campo-adicional">
+
+                <label>¿Te comprometerias a esterilizar a tú nueva compañia?:</label>
+                <input type="radio" id="si1" name="pregunta1" value="si">
+                <label for="si1">Sí</label>
+                <input type="radio" id="no1" name="pregunta1" value="no">
+                <label for="no1">No</label>
+
+                <label>Estas de acuerdo con que se realice seguimiento de adopción:</label>
+                <input type="radio" id="si1" name="pregunta1" value="si">
+                <label for="si1">Sí</label>
+                <input type="radio" id="no1" name="pregunta1" value="no">
+                <label for="no1">No</label>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </body>
