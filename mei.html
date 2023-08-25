@@ -82,5 +82,15 @@
             </div>               
         </div>
     </div>
+    <script>
+        const imagengrande = document.getElementById("img-principal")
+        const imagenes= document.querySelectorAll(".img-content")
+        imagenes.forEach(imagen=>{
+            imagen.addEventListener("click", (e)=>{
+                const source = e.target.src
+                imagengrande.src = source
+            })
+        })
+    </script>
 </body>
 </html>

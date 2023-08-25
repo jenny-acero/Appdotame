@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <title>Appdotame</title>
+    <link rel="icon" type="image/png" href="imagenes-pincipales/APPDOTAME-favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="javascript.js"></script>
+</head>
+    <body>
+        <div class="container">
+            <!--NAVEGACION-->
+            <div class="barra-de-navegacion">
+                <div class="navegacion">
+                    <a href="#inicio"><img src="imagenes-pincipales/APPDOTAME-sin-fondo-logo.png"></a>
+                </div>
+                <div class="navegacion">
+                    <a href="#inicio">Inicio</a>
+                </div>
+                <div class="navegacion">
+                    <a href="#ADOPTAR">Adoptar</a>
+                </div>
+                <div class="navegacion">
+                    <a href="#dar-en-adopcion">Dar en adopción</a>
+                </div>
+                <div class="navegacion">
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="navegacion">
+                    <a href="#mi-sesion">Mi Sesión</a>
+                </div>
+            </div>
+        
+            <!--BUSCADOR-->
+            <div class="search-container">
+                <form action="/buscar" method="get" class="search-form">
+                  <input type="text" name="q" placeholder="Buscar..." />
+                  <button type="submit">Buscar</button>
+                </form>
+            </div>
+
+            <!--ADOPCION-->
+            <div class="section-adoption">
+                <% for (pet of pets) { %>
+                <div class="adoption-1">
+                    <div class="imagen-1"><img id="imagen-1" src="<%= pet.imagenes[0] %>" alt="gato"></div>
+                    <div class="conten-des">
+                        <div class="name"><h2><%= pet.nombre %></h2></div>
+                        <div class="descripcion">
+                            <div class="tarjeta-info">
+                                <div class="atributo">Sexo</div>
+                                <div class="respuesta"><%= pet.sexo %></div>
+                            </div>
+                            <div class="tarjeta-info">
+                                <div class="atributo">Raza</div>
+                                <div class="respuesta"><%= pet.raza %></div>
+                            </div>
+                            <div class="tarjeta-info">
+                                <div class="atributo">Edad</div>
+                                <div class="respuesta"><%= pet.edad %></div>
+                            </div>
+                            <div class="tarjeta-info">
+                                <div class="atributo">Ubicacion</div>
+                                <div class="respuesta"><%= pet.ubicacion %></div>
+                            </div>
+                        </div>
+                        <div class="boton-adoptar"><a href="<%= pet.nombre %>" class="boton" target="_blank">ADOPTAR</a></div>
+                    </div>
+                </div>
+                <% } %>  
+            </div>
+            <!--PIE DE PAGINA-->
+            <div class="pie-pagina">
+                <div class="tips">
+                    <div class="titulo"><h2>Cuida de tu mascota</h2></div>
+                    <div class="tips-1">
+                        <div class="img-tips"><img class="img-tips-1" src="imagenes-pincipales/appdotamesinfondo.png" alt="tips"></div>
+                        <div class="tips-descripcion">
+                            <ul>
+                            <li>Llévalo al veterinario de forma periódica.</li>
+                            <li>Premia su buen comportamiento y acarícialo.</li>
+                            <li>Sigue una rutina.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="publication">
+                    <div class="titulo-publicidad"><h2>Sitios de Interes</h2></div>
+                    <div class="publiciad">
+                        <div class="img-publi"><img class="img-publi-1" src="imagenes-pincipales/appdotamesinfondo.png" alt="tips"></div>
+                        <p>veterinaria 24 horas por 7 dias.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

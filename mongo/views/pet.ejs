@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Pandora</title>
+    <% if (pet) { %>  
+    <title><%= pet.nombre %></title>
+    <% } %>
     <link rel="icon" type="image/png" href="imagenes-pincipales/APPDOTAME-favicon.png">
     <link rel="stylesheet" href="styles.css">
-    <script src="javascript.js"></script>
 </head>
 <body id="perros">
     <div class="contenedor">
@@ -29,58 +30,72 @@
                 <a href="#mi-sesion">Mi sesión</a>
             </div>
         </div>
+        <% if (pet) { %>          
         <div class="pagina">
-            <div id= "nombre"><h2>PANDORA</h2></div>
+            <div id= "nombre"><h2><%= pet.nombre %></h2></div>
             <div class="contenedor-pagina">
                 <div class="img-grup">
                     <div id="previus">
-                        <div class="img-content"><img id="img-1" src="imagenes-perros/pandora-1.jpg" alt="imagen-1"></div>
-                        <div class="img-content"><img id="img-2" src="imagenes-perros/pandora-2.jpg" alt="imagen-2"></div>
-                        <div class="img-content"><img id="img-3" src="imagenes-perros/pandora-3.jpg" alt="imagen-3"></div>
-                        <div class="img-content"><img id="img-4" src="imagenes-perros/pandora-4.jpg" alt="imagen-4"></div>
+                        <div class="img-content"><img id="img-1" src="<%= pet.imagenes[0] %>" alt="imagen-1"></div>
+                        <div class="img-content"><img id="img-2" src="<%= pet.imagenes[1] %>" alt="imagen-2"></div>
+                        <div class="img-content"><img id="img-3" src="<%= pet.imagenes[2] %>" alt="imagen-3"></div>
+                        <div class="img-content"><img id="img-4" src="<%= pet.imagenes[3] %>" alt="imagen-4"></div>
                     </div>
                     <div id="principal">
-                        <div class="img-grande"><img id="img-principal" src="imagenes-perros/pandora-1.jpg" alt="imagen"></div>
+                        <div class="img-grande"><img id="img-principal" src="<%= pet.imagenes[0] %>" alt="imagen"></div>
                     </div>
                 </div>
                 <div class="caracteristicas">
                     <div class="info">
                         <div class="tarjeta">
                             <div class="propiedad">Especie</div>
-                            <div class="valor">Canino</div>
+                            <div class="valor"><%= pet.especie %></div>
                         </div>
                         <div class="tarjeta">
                             <div class="propiedad">Raza</div>
-                            <div class="valor">Criollo</div>
+                            <div class="valor"><%= pet.raza %></div>
                         </div>
                         <div class="tarjeta">
                             <div class="propiedad">Edad</div>
-                            <div class="valor">5 años</div>
+                            <div class="valor"><%= pet.edad %></div>
                         </div>
                         <div class="tarjeta">
                             <div class="propiedad">Esterilizado</div>
-                            <div class="valor">si</div>
+                            <div class="valor">
+                                <% if (pet.esterilizado) { %>
+                                    sí
+                                <% } else{ %>  
+                                    no
+                                <% } %>
+                            </div>
                         </div>
                         <div class="tarjeta">
                             <div class="propiedad">Vacunas</div>
-                            <div class="valor">Al día</div>
+                            <div class="valor">
+                                <% if (pet.esterilizado) { %>
+                                    sí
+                                <% } else{ %>  
+                                    no
+                                <% } %>
+                            </div>
                         </div>
                         <div class="tarjeta">
                             <div class="propiedad">Ubicacion</div>
-                            <div class="valor">Bogota</div>
+                            <div class="valor"><%= pet.ubicacion %></div>
                         </div>
                         <div class="tarjeta">
                             <div class="propiedad">Cuidados Especiales</div>
-                            <div class="valor">Ninguno</div>
+                            <div class="valor"><%= pet.cuidadosEspeciales %></div>
                         </div>
                         <div class="boton-pagina">
-                            <a href="adoptar.html" class="boton-1" target="_blank">ADOPTAR</a>
-                            <a href="contactar.html" class="boton-2" target="_blank">CONTACTAR</a>
+                            <a href="/adoptar?nombre=<%= pet.nombre %>" class="boton-1" target="_blank">ADOPTAR</a>
+                            <a href="contactar" class="boton-2" target="_blank">CONTACTAR</a>
                         </div>
                     </div>
                 </div> 
             </div>               
         </div>
+        <% } %>
     </div>
     <script>
         const imagengrande = document.getElementById("img-principal")

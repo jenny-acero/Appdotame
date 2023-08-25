@@ -16,17 +16,19 @@
                     <h2>Solicitud de Adopción</h2>
                 </div>
             </div>
-            <form class="form">
+            <form class="form" action="/adoptar" method="POST">
                 <div class="pregunta">
                     <label for="nombre-mascota">Nombre de la mascota:</label>
-                    <input type="text" id="nombre-mascota" name="nombre-mascota" required>
+                    <% if (pet) { %>  
+                    <input type="text" id="nombre-mascota" name="nombreMascota" value="<%= pet.nombre %>" required>
+                    <% } %>
                 </div>
                 
                 <div class="mas">Nos gustaría saber acerca de ti</div>
                 
                 <div class="pregunta">
                     <label for="nombre-adopcion">Nombre del responsable de la adopción:</label>
-                    <input type="text" id="nombre-adopcion" name="nombre-adopcion" required>
+                    <input type="text" id="nombre-adopcion" name="nombreResponsable" required>
                 </div>
 
                 <div class="pregunta">
@@ -45,7 +47,7 @@
 
                 <div class="pregunta">
                     <label for="localidad">Localidad:</label>
-                    <input type="text" id="ciudad" name="ciudad" required>
+                    <input type="text" id="localidad" name="localidad" required>
                 </div>
 
                 <div class="pregunta">
@@ -60,87 +62,87 @@
 
                 <div class="pregunta">
                     <label for="email">Correo Electronico:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="correo" required>
                 </div>
 
                 <div class="familia">Cuentanos sobre tu familia</div>
                     
                 <div class="pregunta">
                     <label for="numero">Número de miembros de tu familia:</label>
-                    <input type="number" id="numero" name="numero" required>
+                    <input type="number" id="numero" name="familia" required>
                 </div>
 
                 <div class="pregunta">
                     <label for="edades">Edades:</label>
-                    <input type="text" id="edades" name="edades" required>
+                    <input type="text" id="edades" name="edadesFamilia" required>
                 </div>
 
                 <div class="pregunta-1">
                     <label class="pregunta-info">Todos los integrantes de tu familia estan enterados de la intención de adopción</label>
-                    <input type="radio" id="si1" name="pregunta1" value="si">
+                    <input type="radio" id="si1" name="intencion" value="true">
                     <label id="si-1" for="si1">Sí</label>
-                    <input type="radio" id="no1" name="pregunta1" value="no">
+                    <input type="radio" id="no1" name="intencion" value="false">
                     <label id="no-1" for="no1">No</label>
                 </div>
 
                 <div class="pregunta-1">
                     <label class="pregunta-info">¿Estan de acuerdo?:</label>
-                    <input type="radio" id="si1" name="pregunta2" value="si">
+                    <input type="radio" id="si1" name="acuerdo" value="true">
                     <label id="si-1" for="si1">Sí</label>
-                    <input type="radio" id="no1" name="pregunta2" value="no">
+                    <input type="radio" id="no1" name="acuerdo" value="false">
                     <label id="no-1" for="no1">No</label>
                     <label class="otro">¿Porque?:</label>
-                    <input type="text" id="campo-adicional" name="campo-adicional">
+                    <input type="text" id="campo-adicional" name="porque">
                 </div>
                     
                 <div class="pregunta-1">
                     <label class="pregunta-info">¿Alguien con alergías?:</label>
-                    <input type="radio" id="si1" name="pregunta3" value="si">
+                    <input type="radio" id="si1" name="alergia" value="true">
                     <label id="si-1" for="si1">Sí</label>
-                    <input type="radio" id="no1" name="pregunta3" value="no">
+                    <input type="radio" id="no1" name="alergia" value="false">
                     <label id="no-1" for="no1">No</label>
                 </div>
 
                 <div class="pregunta-1">
                     <label class="pregunta-info">Con anterioridad, ¿has tenido mascotas?:</label>
-                    <input type="radio" id="si1" name="pregunta4" value="si">
+                    <input type="radio" id="si1" name="mascotaAnterior" value="true">
                     <label id="si-1" for="si1">Sí</label>
-                    <input type="radio" id="no1" name="pregunta4" value="no">
+                    <input type="radio" id="no1" name="mascotaAnterior" value="false">
                     <label id="no-1" for="no1">No</label>
                 </div>
 
                 <div class="pregunta">
                     <label class="pregunta-info" for="mensaje">¿Porque ya no estan contigo?:</label>
-                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                    <textarea id="mensaje" name="porqueYaNoEstan" rows="4" required></textarea>
                 </div>
 
                 <div class="pregunta-1">
                     <label class="pregunta-info">Actualmente, ¿Tienes otras mascotas?:</label>
-                    <input type="radio" id="si1" name="pregunta5" value="si">
+                    <input type="radio" id="si1" name="mascotaActual" value="true">
                     <label id="si-1" for="si1">Sí</label>
-                    <input type="radio" id="no1" name="pregunta5" value="no">
+                    <input type="radio" id="no1" name="mascotaActual" value="false">
                     <label id="no-1" for="no1">No</label>
                     <label class="otro-1">¿Cuales son?:</label>
-                    <input type="text" id="campo-adicional-1" name="campo-adicional">
+                    <input type="text" id="campo-adicional-1" name="cuales">
                 </div>
 
                 <div class="pregunta-1">
                     <label class="pregunta-info">¿Te comprometerias a esterilizar a tú nueva compañia?:</label>
-                    <input type="radio" id="si1" name="pregunta6" value="si">
+                    <input type="radio" id="si1" name="esterilizar" value="true">
                     <label id="si-1" for="si1">Sí</label>
-                    <input type="radio" id="no1" name="pregunta6" value="no">
+                    <input type="radio" id="no1" name="esterilizar" value="false">
                     <label id="no-1" for="no1">No</label>
                 </div>
 
                 <div class="pregunta-1">
                     <label class="pregunta-info">Estas de acuerdo con que se realice seguimiento de adopción:</label>
-                    <input type="radio" id="si1" name="pregunta7" value="si">
+                    <input type="radio" id="si1" name="seguimiento" value="true">
                     <label id="si-1" for="si1">Sí</label>
-                    <input type="radio" id="no1" name="pregunta7" value="no">
+                    <input type="radio" id="no1" name="seguimiento" value="false">
                     <label id="no-1" for="no1">No</label>
                 </div>
 
-                <button id="enviar" type="submit">Enviar</button>
+                <button id="enviar" type="submit" >Enviar</button>
             </form>
         </div>
     </body>
