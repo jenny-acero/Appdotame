@@ -7,6 +7,31 @@ const morgan = require("morgan") //import morgan
 const methodOverride = require("method-override")
 const mongoose = require("mongoose")
 
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = process.env.DATABASE_URL;
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
+  async function run() {
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      // Send a ping to confirm a successful connection
+      await client.db("admin").command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
 /////////////////////////////////////////////
 // Database Connection
 /////////////////////////////////////////////
@@ -107,6 +132,7 @@ app.use(express.static(__dirname+"/static"))
 app.get("/", async (req, res) => {
     // get todos
     const pets = await Pet.find({})
+    console.log({pets})
 
     // render index.ejs
     res.render("index.ejs", {pets})
@@ -136,15 +162,11 @@ app.post("/adoptar/gracias", async(req, res)=>{
     
 })
 
-app.get("/:nombreser", async(req, res)=>{
-    const nombreRecibido =  req.params.nombreser
-    const pet = await Pet.findOne({nombre:nombreRecibido})
-    res.render("pet.ejs", {pet})
-})
 
 
 
 app.get("/seedpet", async (req,res) => {
+    console.log("/seedpet.....")
     await Pet.deleteMany({})
 
     await Pet.create([
@@ -255,6 +277,14 @@ app.get("/seedpet", async (req,res) => {
     res.redirect("/")
 })
 
+app.get("/:nombreser", async(req, res)=>{
+    console.log("/:nombreser")
+    const nombreRecibido =  req.params.nombreser
+    const pet = await Pet.findOne({nombre:nombreRecibido})
+    res.render("pet.ejs", {pet})
+})
+
+
 app.post("/todo", async (req, res) => {
     //create the new todo
     await Todo.create(req.body)
@@ -270,3 +300,5 @@ app.delete("/todo/:id", async (req, res) => {
     // redirect to main page
     res.redirect("/")
 })
+
+
