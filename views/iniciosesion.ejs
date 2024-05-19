@@ -1,0 +1,60 @@
+<!-- views/inicio_sesion.ejs -->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión</title>
+  </head>
+  <body>
+    <h1>Iniciar Sesión</h1>
+    <form id="loginForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+      <label for="contraseña">Contraseña:</label>
+      <input
+        type="password"
+        id="contraseña"
+        name="contraseña"
+        required
+      /><br /><br />
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+    <script>
+      const form = document.getElementById("loginForm");
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var formData = new FormData(form);
+        // output as an object
+        const body = Object.fromEntries(formData);
+        console.log({ body });
+
+        try {
+          const loginResponse = await fetch("/iniciosesion", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          });
+          console.log({ loginResponse });
+          if (loginResponse.status === 200) {
+            const jsonReponse = await loginResponse.json();
+            console.log({ jsonReponse });
+            localStorage.setItem("userToken", jsonReponse.token)
+            localStorage.setItem("userId", jsonReponse._id)
+
+            window.location.href = "/plataforma"
+            
+          } else {
+            alert("Algo salió mal");
+          }
+        } catch (e) {
+          console.log("error", e);
+        }
+      });
+    </script>
+  </body>
+</html>
