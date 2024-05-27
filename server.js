@@ -359,7 +359,12 @@ app.get("/mascotas/:nombreser", async (req, res) => {
   console.log("/:nombreser");
   const nombreRecibido = req.params.nombreser;
   const pet = await Pet.findOne({ nombre: nombreRecibido });
-  res.render("pet.ejs", { pet });
+
+  // Verificando usuario loggeado
+  const userId = req.cookies.userid;
+  const token = req.cookies.token;
+  const isUserLogged = userId && token;
+  res.render("pet.ejs", { pet, isUserLogged });
 });
 
 app.post("/todo", async (req, res) => {
