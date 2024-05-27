@@ -1,38 +1,163 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agregar Mascota</title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+      }
+
+      label {
+        margin: 10px 0 5px 0;
+        color: #666;
+      }
+
+      input {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        color: #333;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        background-color: #007bff;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        color: #333;
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
     <div class="container">
-        <h1>Agregar Información de la Mascota</h1>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <label for="name">Nombre de la mascota</label>
-            <input type="text" id="name" name="name" required>
+      <h1>Agregar Información de la Mascota</h1>
+      <form
+        action="/agregarMascota"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <label for="nombre">Nombre de la mascota</label>
+        <input type="text" id="nombre" name="nombre" required />
 
-            <label for="age">Edad:</label>
-            <input type="text" id="age" name="age" required>
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" required />
 
-            <label for="breed">Raza:</label>
-            <input type="text" id="breed" name="breed" required>
+        <label for="breed">Raza:</label>
+        <input type="text" id="raza" name="raza" required />
 
-            <label for="location">Ubicación:</label>
-            <input type="text" id="location" name="location" required>
+        <!-- especie -->
+        <label for="especie">Especie:</label>
+        <select name="especie" id="especie">
+          <option value="perro">Perro</option>
+          <option value="gato">Gato</option>
+          <option value="otro">Otro</option>
+        </select>
 
-            <label for="location">Esterilizado:</label>
-            <input type="text" id="location" name="location" required>
+        <!-- Sexo -->
+        <label for="sexo">Sexo:</label>
+        <select name="sexo" id="sexo">
+          <option value="macho">Macho</option>
+          <option value="hembra">Hembra</option>
+        </select>
 
-            <label for="location">Vacunas:</label>
-            <input type="text" id="location" name="location" required>
+        <label for="location">Ubicación:</label>
+        <input type="text" id="ubicacion" name="ubicacion" required />
 
-            <label for="location">Cuidades Especiales:</label>
-            <input type="text" id="location" name="location" required>
+        <!-- A boolean value for Esterilizado with check box -->
+        <label for="esterilizado">Esterilizado:</label>
+        <input
+          type="checkbox"
+          id="esterilizado"
+          name="esterilizado"
+          value="true"
+        />
 
-            <button type="submit">Enviar</button>
-        </form>
+        <!-- A boolean value for Vacunas -->
+
+        <label for="vacunas">Vacunas:</label>
+        <input type="checkbox" id="vacunas" name="vacunas" value="true" />
+
+        <label for="cuidadosEspeciales">Cuidades Especiales:</label>
+        <input
+          type="text"
+          id="cuidadosEspeciales"
+          name="cuidadosEspeciales"
+          required
+        />
+
+        <!-- Add file input -->
+        <label for="imagenes">Imagen:</label>
+        <input type="file" id="imagenes" name="imagenes" required />
+
+        <button type="submit">Enviar</button>
+      </form>
+      <script>
+        // Verify that all the fields in the form are filled
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (event) => {
+          const nombre = document.getElementById("nombre").value;
+          const edad = document.getElementById("edad").value;
+          const raza = document.getElementById("raza").value;
+          const especie = document.getElementById("especie").value;
+          const sexo = document.getElementById("sexo").value;
+          const ubicacion = document.getElementById("ubicacion").value;
+          const esterilizado = document.getElementById("esterilizado").value;
+          const vacunas = document.getElementById("vacunas").value;
+          const cuidadosEspeciales =
+            document.getElementById("cuidadosEspeciales").value;
+          const imagenes = document.getElementById("imagenes").value;
+
+          if (
+            !nombre ||
+            !edad ||
+            !raza ||
+            !especie ||
+            !sexo ||
+            !ubicacion ||
+            !esterilizado ||
+            !vacunas ||
+            !cuidadosEspeciales ||
+            !imagenes
+          ) {
+            //   event.preventDefault();
+            alert("Por favor, llena todos los campos");
+          }
+        });
+      </script>
     </div>
-</body>
+  </body>
 </html>

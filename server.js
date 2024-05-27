@@ -3,6 +3,7 @@
 /////////////////////////////////////////////
 require("dotenv").config(); 
 const express = require("express"); 
+const path = require('path');
 const morgan = require("morgan"); 
 const methodOverride = require("method-override");
 const bodyParser = require('body-parser');
@@ -112,6 +113,16 @@ const usuarioSchema = new Schema({
   role: String,
 });
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'static/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+});
+const upload = multer({ storage: storage });
 
 /////////////////////////////////////////////////
 // Create our Express Application Object
@@ -217,6 +228,31 @@ app.get("/plataforma", async (req, res) => {
 
 app.get("/agregarMascota", (req, res) => {
   res.render("agregarMascota.ejs"); // Renderiza agregar mascota
+});
+
+app.post("/agregarMascota", upload.single('imagenes'), async (req, res) => {
+  // save the image that was uploaded
+  
+  console.log("/agregarMascota........")
+  const body = req.body;
+  console.log({body});
+  // https://upload.wikimedia.org/wikipedia/commons/b/bf/Bulldog_inglese.jpg
+  await Pet.create
+  ([
+    {
+      nombre: body.nombre,
+      sexo: body.sexo,
+      especie: body.especie,
+      raza: body.raza,
+      edad: body.edad,
+      esterilizado: body.esterilizado,
+      vacunas: body.vacunas,
+      ubicacion: body.ubicacion,
+      cuidadosEspeciales: body.cuidadosEspeciales,
+      imagenes: [ req.file.path]
+    },
+  ]);
+  res.end("Mascota agregada exitosamente");
 });
 
 
