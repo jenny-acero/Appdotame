@@ -4,34 +4,30 @@
     <meta charset="UTF-8">
     <title>Appdotame</title>
     <link rel="icon" type="image/png" href="imagenes-pincipales/APPDOTAME-favicon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
     <script src="javascript.js"></script>
 </head>
     <body>
         <div class="container">
             <!--NAVEGACION-->
-            <div class="barra-de-navegacion">
-                <div class="navegacion">
-                    <a href="#inicio"><img src="imagenes-pincipales/APPDOTAME-sin-fondo-logo.png"></a>
-                </div>
-                <div class="navegacion">
-                    <a href="#inicio">Inicio</a>
-                </div>
-                <div class="navegacion">
-                    <a href="#ADOPTAR">Adoptar</a>
-                </div>
-                <div class="navegacion">
-                    <a href="#dar-en-adopcion">Dar en adopción</a>
-                </div>
-                <div class="navegacion">
-                    <a href="#contacto">Contacto</a>
-                </div>
-                <div class="navegacion">
-                    <a href="#mi-sesion">Mi Sesión</a>
-                </div>
-            </div>
-        
-            <!--BUSCADOR-->
+            <nav class="menu-desplegable">
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#services">Servicios</a></li>
+                    <li class="dropdown">
+                        <a href="#more" class="dropbtn">Más</a>
+                        <div class="dropdown-content">
+                            <a href="#link1">Enlace 1</a>
+                            <a href="#link2">Enlace 2</a>
+                            <a href="#link3">Enlace 3</a>
+                        </div>
+                    </li>
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#about">Acerca de</a></li>
+                </ul>
+            </nav>
+            
+            <!--BUSCADOR
             <div class="search-container">
                 <form action="/buscar" method="get" class="search-form">
                   <input type="text" name="q" placeholder="Buscar..." />
@@ -39,7 +35,7 @@
                 </form>
             </div>
 
-            <!--ADOPCION-->
+            <!ADOPCION-->
             <div class="section-adoption">
                 <div class="adoption-1">
                     <div class="imagen-1"><img id="imagen-1" src="imagenes-perros/bahia-1.jpg" alt="gato"></div>

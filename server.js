@@ -1,20 +1,19 @@
 /////////////////////////////////////////////
-// Import Our Dependencies
+// Importar Dependencias
 /////////////////////////////////////////////
-require("dotenv").config(); // Load ENV Variables
-const express = require("express"); // import express
-const morgan = require("morgan"); //import morgan
+require("dotenv").config(); 
+const express = require("express"); 
+const morgan = require("morgan"); 
 const methodOverride = require("method-override");
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-
 const mongoose = require("mongoose");
 const Usuario = require("./models/usuario");
-
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri = process.env.DATABASE_URL;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+
+// Crear conexión a base de datos MongoDB
+const uri = process.env.DATABASE_URL;
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -24,32 +23,25 @@ const client = new MongoClient(uri, {
 });
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
-    // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
+      "Conexión establecida a MongoDB!"
     );
   } finally {
-    // Ensures that the client will close when you finish/error
     await client.close();
   }
 }
 run().catch(console.dir);
-/////////////////////////////////////////////
-// Database Connection
-/////////////////////////////////////////////
-// Setup inputs for our connect function
+
 const DATABASE_URL = process.env.DATABASE_URL;
 const CONFIG = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-// Establish Connection
+
 mongoose.connect(DATABASE_URL, CONFIG);
 
-// Events for when connection opens/disconnects/errors
 mongoose.connection
   .on("open", () => console.log("Connected to Mongoose"))
   .on("close", () => console.log("Disconnected from Mongoose"))
@@ -112,6 +104,15 @@ const solicitudSchema = new Schema({
 });
 const Solicitud = model("Solicitud", solicitudSchema);
 
+// usuario schema
+const usuarioSchema = new Schema({
+  nombre: String,
+  email: { type: String, unique: true },
+  contraseña: String,
+  role: String,
+});
+
+
 /////////////////////////////////////////////////
 // Create our Express Application Object
 /////////////////////////////////////////////////
@@ -125,6 +126,8 @@ app.use(express.urlencoded({ extended: true })); // parse urlencoded request bod
 app.use("/static", express.static("static")); // serve files from public statically
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 ////////////////////////////////////////////
 // Routes
 ////////////////////////////////////////////
@@ -133,7 +136,7 @@ app.use(cookieParser());
 // Server Listener
 //////////////////////////////////////////////
 const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`Now Listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`Ahora puede usar el puerto ${PORT}`));
 app.use(express.static(__dirname + "/static"));
 ////////////////////////////////////////////
 // Routes
@@ -152,11 +155,11 @@ app.get("/registro", (req, res) => {
 });
 
 app.post("/registro", async (req, res) => {
-  const { nombre, email, contraseña } = req.body;
+  const { nombre, email, contraseña, role } = req.body;
   console.log("req.body");
   console.log(req.body);
   try {
-    const usuario = await Usuario.create({ nombre, email, contraseña });
+    const usuario = await Usuario.create({ nombre, email, contraseña, role});
     console.log("Usuario registrado:", usuario);
     res.send("¡Usuario registrado exitosamente!");
   } catch (error) {
@@ -192,7 +195,8 @@ app.post("/iniciosesion", async (req, res) => {
       res.writeHead(200, {
         "Set-Cookie": [ `token=${usuarioUpdated.token}; HttpOnly`,`userid=${usuarioUpdated._id.toString()};HttpOnly`],
         "Access-Control-Allow-Credentials": "true"
-      }).send();
+      });
+      res.end(JSON.stringify({_id:usuarioUpdated._id, token:usuarioUpdated.token}));
 
     } else {
       res.status(401).json({message:"Credenciales inválidas"});
@@ -204,9 +208,17 @@ app.post("/iniciosesion", async (req, res) => {
 });
 
 app.get("/plataforma", async (req, res) => {
-    if (!req.cookies.token) return res.redirect("/iniciosesion")
+    if (!req.cookies.token) return res.redirect("/iniciosesion");
+    const userId = req.cookies.userid;
+    const user = await Usuario.findOne({ _id: userId });
+    res.render("plataforma.ejs", { user });
 
 });
+
+app.get("/agregarMascota", (req, res) => {
+  res.render("agregarMascota.ejs"); // Renderiza agregar mascota
+});
+
 
 app.get("/adoptar", async (req, res) => {
   const nombreRecibido = req.query.nombre;
@@ -221,13 +233,13 @@ app.post("/adoptar", async (req, res) => {
   await Solicitud.create(body);
   res.redirect("/");
 
-  // const nombreRecibido =  req.query.nombre
-  // const pet = await Pet.findOne({nombre:nombreRecibido})
-  // res.render("adoptar.ejs", {pet})
+  const nombreRecibido =  req.query.nombre
+  const pet = await Pet.findOne({nombre:nombreRecibido})
+  res.render("adoptar.ejs", {pet})
 });
 
 app.post("/adoptar/gracias", async (req, res) => {
-  // const body = req.body
+  const body = req.body
   res.json({ g: "g" });
 });
 
@@ -247,10 +259,10 @@ app.get("/seedpet", async (req, res) => {
       ubicacion: "Bogota",
       cuidadosEspeciales: "Ninguno",
       imagenes: [
-        "imagenes-perros/bahia-1.jpg",
-        "imagenes-perros/bahia-2.jpg",
-        "imagenes-perros/bahia-3.jpg",
-        "imagenes-pincipales/appdotamesinfondo.png",
+        "/imagenes-perros/bahia-1.jpg",
+        "/imagenes-perros/bahia-2.jpg",
+        "/imagenes-perros/bahia-3.jpg",
+        "/imagenes-pincipales/appdotamesinfondo.png",
       ],
     },
     {
@@ -264,10 +276,10 @@ app.get("/seedpet", async (req, res) => {
       ubicacion: "Bogota",
       cuidadosEspeciales: "Ninguno",
       imagenes: [
-        "imagenes-perros/pandora-1.jpg",
-        "imagenes-perros/pandora-2.jpg",
-        "imagenes-perros/pandora-3.jpg",
-        "imagenes-perros/pandora-4.jpg",
+        "/imagenes-perros/pandora-1.jpg",
+        "/imagenes-perros/pandora-2.jpg",
+        "/imagenes-perros/pandora-3.jpg",
+        "/imagenes-perros/pandora-4.jpg",
       ],
     },
     {
@@ -281,10 +293,10 @@ app.get("/seedpet", async (req, res) => {
       ubicacion: "Bogota",
       cuidadosEspeciales: "Ninguno",
       imagenes: [
-        "imagenes-perros/bigotes-1.jpg",
-        "imagenes-perros/bigotes-2.jpg",
-        "imagenes-perros/bigotes-3.jpg",
-        "imagenes-pincipales/appdotamesinfondo.png",
+        "/imagenes-perros/bigotes-1.jpg",
+        "/imagenes-perros/bigotes-2.jpg",
+        "/imagenes-perros/bigotes-3.jpg",
+        "/imagenes-pincipales/appdotamesinfondo.png",
       ],
     },
     {
@@ -298,10 +310,10 @@ app.get("/seedpet", async (req, res) => {
       ubicacion: "Bogota",
       cuidadosEspeciales: "Ninguno",
       imagenes: [
-        "imagenes-perros/pumba-1.jpg",
-        "imagenes-perros/pumba-2.jpg",
-        "imagenes-perros/pumba-3.jpg",
-        "imagenes-pincipales/appdotamesinfondo.png",
+        "/imagenes-perros/pumba-1.jpg",
+        "/imagenes-perros/pumba-2.jpg",
+        "/imagenes-perros/pumba-3.jpg",
+        "/imagenes-pincipales/appdotamesinfondo.png",
       ],
     },
     {
@@ -315,10 +327,10 @@ app.get("/seedpet", async (req, res) => {
       ubicacion: "Bogota",
       cuidadosEspeciales: "Ninguno",
       imagenes: [
-        "imagenes-perros/mei-1.jpg",
-        "imagenes-perros/mei-2.jpg",
-        "imagenes-perros/mei-3.jpg",
-        "imagenes-perros/mei-4.jpg",
+        "/imagenes-perros/mei-1.jpg",
+        "/imagenes-perros/mei-2.jpg",
+        "/imagenes-perros/mei-3.jpg",
+        "/imagenes-perros/mei-4.jpg",
       ],
     },
     {
@@ -332,10 +344,10 @@ app.get("/seedpet", async (req, res) => {
       ubicacion: "Bogota",
       cuidadosEspeciales: "Ninguno",
       imagenes: [
-        "imagenes-perros/teo-1.jpg",
-        "imagenes-perros/teo-2.jpg",
-        "imagenes-perros/teo-3.jpg",
-        "imagenes-perros/teo-4.jpg",
+        "/imagenes-perros/teo-1.jpg",
+        "/imagenes-perros/teo-2.jpg",
+        "/imagenes-perros/teo-3.jpg",
+        "/imagenes-perros/teo-4.jpg",
       ],
     },
   ]);

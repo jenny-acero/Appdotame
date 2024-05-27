@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Mascota</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Información de la Mascota</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="name">Nombre de la mascota</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="age">Edad:</label>
+            <input type="text" id="age" name="age" required>
+
+            <label for="breed">Raza:</label>
+            <input type="text" id="breed" name="breed" required>
+
+            <label for="location">Ubicación:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="location">Esterilizado:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="location">Vacunas:</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="location">Cuidades Especiales:</label>
+            <input type="text" id="location" name="location" required>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>

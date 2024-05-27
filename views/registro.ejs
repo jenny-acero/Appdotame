@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro de Usuario</title>
+  <script> src="javascript.js"</script>
 </head>
 <body>
   <h1>Registro de Usuario</h1>
@@ -16,6 +17,11 @@
     <input type="email" id="email" name="email" required><br><br>
     <label for="contraseña">Contraseña:</label>
     <input type="password" id="contraseña" name="contraseña" required><br><br>
+    <label for="role">Selecciona tu rol:</label>
+    <select name="role" id="role">
+      <option value="adoptante">Adoptante</option>
+      <option value="organizacion">Organización</option>
+    </select><br><br>
     <button type="submit">Registrarse</button>
   </form>
 </body>
