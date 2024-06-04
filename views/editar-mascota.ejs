@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <% if (pet) { %>
+  <title><%= pet.nombre %></title>
+  <% } %>
+  <link rel="icon" type="image/png" href="/imagenes-pincipales/APPDOTAME-favicon.png">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      right: 0;
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .p-3 {
+      margin: 1rem;
+    }
+  </style>
+</head>
+
+<body id="perros">
+  <div class="contenedor">
+      <div class="barra-de-navegacion">
+        <div class="navegacion">
+          <a href="/"><img src="/static/imagenes-pincipales/APPDOTAME-sin-fondo-logo.png"></a>
+        </div>
+        <div class="navegacion">
+          <a href="/">Inicio</a>
+        </div>
+        <div class="navegacion">
+          <a href="/adoptar">Adoptar</a>
+        </div>
+        <div class="navegacion">
+          <a href="/agregarMascota">Dar en adopción</a>
+        </div>
+        <div class="navegacion">
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class=" navegacion">
+          <div class="dropdown">
+            <a href="#sesion">Sesion</a>
+            <div class="dropdown-content">
+              <a class="p-3" href="/iniciosesion">Iniciar sesión</a>
+              <br>
+              <br>
+              <a class="p-3" href="/registro">Registrarse</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+      </div>
+    </div>
+    <% if (pet) { %>
+        <form action="/editar-mascota/<%= pet._id %>" method="POST" class="pagina">
+            <div id="nombre">
+                <h2><%= pet.nombre %></h2>
+            </div>
+            <div class="contenedor-pagina">
+                <div class="img-grup">
+                    <div id="previus">
+                        <div class="img-content"><img id="img-1" src="<%= pet.imagenes[0] %>" alt="imagen-1"></div>
+                        <div class="img-content"><img id="img-2" src="<%= pet.imagenes[1] %>" alt="imagen-2"></div>
+                        <div class="img-content"><img id="img-3" src="<%= pet.imagenes[2] %>" alt="imagen-3"></div>
+                        <div class="img-content"><img id="img-4" src="<%= pet.imagenes[3] %>" alt="imagen-4"></div>
+                    </div>
+                    <div id="principal">
+                        <div class="img-grande"><img id="img-principal" src="<%= pet.imagenes[0] %>" alt="imagen"></div>
+                    </div>
+                </div>
+                <div class="caracteristicas">
+                    <div class="info">
+                        <div class="tarjeta">
+                            <div class="propiedad">Especie</div>
+                            <input class="valor" type="text" name="especie" value="<%= pet.especie %>" required>
+                        </div>
+                        <div class="tarjeta">
+                            <div class="propiedad">Raza</div>
+                            <input class="valor" type="text" name="raza" value="<%= pet.raza %>" required>
+                        </div>
+                        <div class="tarjeta">
+                            <div class="propiedad">Edad</div>
+                            <input class="valor" type="number" name="edad" value="<%= pet.edad %>" required>
+                        </div>
+                        <div class="tarjeta">
+                            <div class="propiedad">Esterilizado</div>
+                            <select class="valor" name="esterilizado" required>
+                                <option value="true" <%= pet.esterilizado ? 'selected' : '' %>>Sí</option>
+                                <option value="false" <%= !pet.esterilizado ? 'selected' : '' %>>No</option>
+                            </select>
+                        </div>
+                        <div class="tarjeta">
+                            <div class="propiedad">Vacunas</div>
+                            <select class="valor" name="vacunas" required>
+                                <option value="true" <%= pet.vacunas ? 'selected' : '' %>>Sí</option>
+                                <option value="false" <%= !pet.vacunas ? 'selected' : '' %>>No</option>
+                            </select>
+                        </div>
+                        <div class="tarjeta">
+                            <div class="propiedad">Ubicación</div>
+                            <input class="valor" type="text" name="ubicacion" value="<%= pet.ubicacion %>" required>
+                        </div>
+                        <div class="tarjeta">
+                            <div class="propiedad">Cuidados Especiales</div>
+                            <input class="valor" type="text" name="cuidadosEspeciales" value="<%= pet.cuidadosEspeciales %>" required>
+                        </div>
+                        <div class="boton-pagina">
+                            <!-- Agrega aquí el botón de envío del formulario -->
+                            <button type="submit">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+        <% } %>        
+  <script>
+    const imagengrande = document.getElementById("img-principal")
+    const imagenes = document.querySelectorAll(".img-content")
+    imagenes.forEach(imagen => {
+      imagen.addEventListener("click", (e) => {
+        const source = e.target.src
+        imagengrande.src = source
+      })
+    })
+  </script>
+</body>
+
+</html>

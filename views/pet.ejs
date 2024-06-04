@@ -37,26 +37,35 @@
 
 <body id="perros">
   <div class="contenedor">
-    <div class="barra">
-      <div class="nave">
-        <a href="/"><img src="/imagenes-pincipales/APPDOTAME-sin-fondo-logo.png"></a>
-      </div>
-      <div class="navegacion">
-        <a href="/">Inicio</a>
-      </div>
-      <div class="navegacion">
-        <a href="/adoptar">Adoptar</a>
-      </div>
-      <div class=" navegacion">
-        <div class="dropdown">
-          <a href="#sesion">Sesion</a>
-          <div class="dropdown-content">
-            <a class="p-3" href="/iniciosesion">Iniciar sesión</a>
-            <br>
-            <br>
-            <a class="p-3" href="/registro">Registrarse</a>
+      <div class="barra-de-navegacion">
+        <div class="navegacion">
+          <a href="/"><img src="/static/imagenes-pincipales/APPDOTAME-sin-fondo-logo.png"></a>
+        </div>
+        <div class="navegacion">
+          <a href="/">Inicio</a>
+        </div>
+        <div class="navegacion">
+          <a href="/adoptar">Adoptar</a>
+        </div>
+        <div class="navegacion">
+          <a href="/agregarMascota">Dar en adopción</a>
+        </div>
+        <div class="navegacion">
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class=" navegacion">
+          <div class="dropdown">
+            <a href="#sesion">Sesion</a>
+            <div class="dropdown-content">
+              <a class="p-3" href="/iniciosesion">Iniciar sesión</a>
+              <br>
+              <br>
+              <a class="p-3" href="/registro">Registrarse</a>
+            </div>
           </div>
         </div>
+      </div>
+  </div>
       </div>
     </div>
     <% if (pet) { %>
@@ -120,9 +129,9 @@
             </div>
             <div class="boton-pagina">
               <% if (isUserLogged) { %>
-              <a href="/adoptar?nombre=<%= pet.nombre %>" class="boton-1" target="_blank">ADOPTAR</a>
+              <a href="/adoptar?nombre=<%= pet.nombre %>" class="boton-1">ADOPTAR</a>
               <% } else { %>
-              <a href="/iniciosesion" class="boton-1" target="_blank">ADOPTAR</a>
+              <a href="/iniciosesion" class="boton-1">ADOPTAR</a>
               <% } %>
             </div>
           </div>

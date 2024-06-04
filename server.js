@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const Usuario = require("./models/usuario");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 
 // Crear conexión a base de datos MongoDB
@@ -82,6 +82,7 @@ const Pet = model("Pet", petSchema);
 
 // Schema de solicitud
 const solicitudSchema = new Schema({
+  mascotaId: ObjectId,
   nombreMascota: String,
   nombreResponsable: String,
   edad: Number,
@@ -155,10 +156,12 @@ app.use(express.static(__dirname + "/static"));
 app.get("/", async (req, res) => {
   // get todos
   const pets = await Pet.find({});
-  console.log({ pets });
-
+  //console.log({ pets });
+  const token = req.cookies.token
+  const usuario = await Usuario.findOne({token});
+  console.log({usuario});
   // render index.ejs
-  res.render("index.ejs", { pets });
+  res.render("index.ejs", { pets , usuario});
 });
 
 app.get("/registro", (req, res) => {
@@ -184,6 +187,8 @@ app.get("/iniciosesion", (req, res) => {
   res.render("iniciosesion.ejs"); // Renderiza el formulario de registro
 });
 
+
+
 app.post("/iniciosesion", async (req, res) => {
   const { email, contraseña } = req.body;
   console.log("req.body");
@@ -191,6 +196,7 @@ app.post("/iniciosesion", async (req, res) => {
 
   try {
     const usuario = await Usuario.findOne({ email, contraseña });
+    console.log({usuario});
     if (usuario) {
       console.log("Usuario autenticado:", usuario);
       
@@ -218,6 +224,7 @@ app.post("/iniciosesion", async (req, res) => {
   }
 });
 
+
 app.get("/plataforma", async (req, res) => {
     if (!req.cookies.token) return res.redirect("/iniciosesion");
     const userId = req.cookies.userid;
@@ -236,7 +243,6 @@ app.post("/agregarMascota", upload.single('imagenes'), async (req, res) => {
   console.log("/agregarMascota........")
   const body = req.body;
   console.log({body});
-  // https://upload.wikimedia.org/wikipedia/commons/b/bf/Bulldog_inglese.jpg
   await Pet.create
   ([
     {
@@ -256,6 +262,43 @@ app.post("/agregarMascota", upload.single('imagenes'), async (req, res) => {
 });
 
 
+app.get("/editar-mascota/:_id", async (req, res) => {
+  const petId = req.params._id;
+  const pet = await Pet.findOne({_id: petId});
+  const token = req.cookies.token;
+  const user = await Usuario.findOne({token:token});
+  const isUserAdmin = user? user.role === "admin":false;
+  res.render("editar-mascota.ejs" , { pet , isUserAdmin }) ;
+});
+
+app.post('/editar-mascota/:_id', async (req, res) => {
+  const petId = req.params._id;
+  const { nombre, sexo, especie, raza, edad, esterilizado, vacunas, ubicacion, cuidadosEspeciales } = req.body;
+  console.log({petId, nombre, sexo, especie, raza, edad, esterilizado, vacunas, ubicacion, cuidadosEspeciales })
+  const wasUpdated = await Pet.findByIdAndUpdate(petId, { nombre, sexo, especie, raza, edad, esterilizado, vacunas, ubicacion, cuidadosEspeciales });
+  res.status(200).json({ mensaje: 'Cambios guardados correctamente', wasUpdated });
+});
+
+// Eliminar mascota solo para administradores
+app.delete("/eliminar-mascota/:_id", async (req, res) => {
+  const token = req.cookies.token;
+  const user = await Usuario.findOne({token:token});
+  const isUserAdmin = user? user.role === "admin":false;
+  const petId = req.params._id;
+  if (isUserAdmin) {
+    const wasDeleted = await Pet.findByIdAndDelete(petId);
+    res.status(200).json({ mensaje: 'Mascota eliminada correctamente', wasDeleted });
+  } else {
+    res.status(403).json({ mensaje: 'No tienes permisos para eliminar esta mascota' });
+  }
+});
+
+app.get("/eliminar-mascota/:_id", async (req, res) => {
+  const petId = req.params._id;
+  await Pet.findByIdAndDelete(petId);
+  res.status(200).json({ message: "Mascota eliminada correctamente" });
+});
+
 app.get("/adoptar", async (req, res) => {
   const nombreRecibido = req.query.nombre;
   const pet = await Pet.findOne({ nombre: nombreRecibido });
@@ -268,10 +311,11 @@ app.post("/adoptar", async (req, res) => {
   // res.redirect("/adoptar/gracias")
   await Solicitud.create(body);
   res.redirect("/");
+});
 
-  const nombreRecibido =  req.query.nombre
-  const pet = await Pet.findOne({nombre:nombreRecibido})
-  res.render("adoptar.ejs", {pet})
+app.get("/solicitudes", async (req, res) => {
+  const solicitudes = await Solicitud.find({});
+  res.render("solicitudes.ejs", { solicitudes });
 });
 
 app.post("/adoptar/gracias", async (req, res) => {
@@ -386,6 +430,16 @@ app.get("/seedpet", async (req, res) => {
         "/imagenes-perros/teo-4.jpg",
       ],
     },
+  ]);
+  
+  await Usuario.deleteMany({});
+  await Usuario.create([
+    {
+      nombre: "administrador",
+      email: "admin@admin.com",
+      contraseña: "administrativo",
+      role: "admin",
+    }
   ]);
 
   res.redirect("/");

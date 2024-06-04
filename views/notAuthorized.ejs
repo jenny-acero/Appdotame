@@ -21,6 +21,7 @@
                     <label for="nombre-mascota">Nombre de la mascota:</label>
                     <% if (pet) { %>  
                     <input type="text" id="nombre-mascota" name="nombreMascota" value="<%= pet.nombre %>" required>
+                    <input type="text" id="mascotaId" name="mascotaId" value="<%= pet._id %>" required>
                     <% } %>
                 </div>
                 

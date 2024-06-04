@@ -9,7 +9,7 @@ const usuarioSchema = new mongoose.Schema({
   token: { type: String, required: false },
   role: {
     type: String,
-    enum: ['adoptante', 'organizacion'],
+    enum: ['adoptante', 'organizacion','admin'],
     default: 'adoptante'
   }
 });

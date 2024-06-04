@@ -6,15 +6,66 @@
                 <title><%= user._id %></title>
                 <title><%= user.role %></title>
             <% } %>
+
+            <style>
+            body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .contenedor {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    .bienvenida {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 50px;
+    }
+
+    .enlace {
+        display: block;
+        text-align: center;
+        padding: 10px 20px;
+        background-color: #a4cc54 ;
+        color: black;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .enlace:hover {
+        background-color: #a4c85c;
+    }
+            </style>
+
         </head>
-            <body>
-                <% if (user.role==="adoptante") { %> 
-                    <h2>¡Bienvenido a la plataforma!</h2>
-                    <a href="/" >Ver mascotas</a>
+        <body>
+            <div class="contenedor">
+                <% if (user && user.role === "adoptante") { %>
+                    <h2 class="bienvenida">¡Bienvenido a la plataforma!</h2>
+                    <a href="/" class="enlace">Ver Mascotas</a>
                 <% } %>
-                <% if (user.role==="organizacion") { %> 
-                    <h2>¡Bienvenido a la plataforma!</h2>
-                    <div class="boton-adoptar"><a href="/agregarMascota" class="boton" target="_blank">AGREGAR MASCOTA</a></div>
+                <% if (user && user.role === "organizacion") { %>
+                    <h2 class="bienvenida">¡Bienvenido a la plataforma!</h2>
+                    <a href="/agregarMascota" class="enlace">Agregar Mascota</a>
+                    <a href="/" class="enlace">Ver Mascotas</a>
                 <% } %>
-            </body>
+                <% if (user && user.role === "admin") { %>
+                    <h2 class="bienvenida">¡Bienvenido a la plataforma!</h2>
+                    <a href="/" class="enlace">Administrar Mascotas</a>
+                    <a href="/solicitudes" class="enlace">Ver Solicitudes de Mascotas</a>
+                <% } %>
+            </div>
+        </body>
     </html>

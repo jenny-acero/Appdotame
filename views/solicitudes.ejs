@@ -1,0 +1,96 @@
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <title>Solicitudes de adopción</title>
+    <link rel="icon" type="image/png" href="imagenes-pincipales/APPDOTAME-favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="javascript.js"></script>
+    <style>
+     body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+.solicitudes-container {
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.solicitud {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.solicitud-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.solicitud-item .label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
+
+.solicitud-item:last-child {
+    margin-bottom: 0;
+}
+
+
+    </style>
+</head>
+    <body>
+        <div class="solicitudes-container">
+            <h1 style="text-align: center;">Solicitudes de adopción</h1>
+            <% for (solicitud of solicitudes) { %>
+                <div class="solicitud">
+                    <div class="solicitud-item">
+                        <span class="label">Mascota ID:</span> <%= solicitud.mascotaId %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Nombre Mascota:</span> <%= solicitud.nombreMascota %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Nombre Responsable:</span> <%= solicitud.nombreResponsable %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Edad:</span> <%= solicitud.edad %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Ciudad:</span> <%= solicitud.ciudad %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Localidad:</span> <%= solicitud.localidad %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Barrio:</span> <%= solicitud.barrio %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Teléfono:</span> <%= solicitud.telefono %>
+                    </div>
+                    <div class="solicitud-item">
+                        <span class="label">Correo:</span> <%= solicitud.correo %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        
+
+    </body>
+</html>

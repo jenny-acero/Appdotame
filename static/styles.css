@@ -34,21 +34,8 @@ body {
 
 
 /*<!--BUSCADOR-->*/
-.search-container {
-    background-image: url(imagenes-pincipales/fondologo.png);
-    background-color: beige;
-    height: 100%;;
-    padding: 6%;
-}
 
-.search-form {
-    display: flex;
-    justify-content: center;
-}
 
-a {
-    margin: auto;
-}
 /*ADOPCION*/
 .section-adoption {
     width: 100%;
@@ -56,6 +43,7 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 20px; 
     max-width: 100%; 
+    padding-top: 180px;
 }
 
 .adoption-1, .adoption-2, .adoption-3, .adoption-4, .adoption-5, .adoption-6 {
@@ -333,7 +321,7 @@ h2 {
     border: none;
     display: inline-block;
     cursor: pointer;
-    background-color: #C0D682;
+    background-color: #a4cc54;
     font-weight: bold;
     margin-right: 4rem;
     margin-left: 0.5rem;
@@ -348,7 +336,7 @@ h2 {
     border: none;
     display: inline-block;
     cursor: pointer;
-    background-color: #C0D682;
+    background-color: #a4cc54;
     font-weight: bold;
     background-image: url(imagenes-pincipales/fondodesenfocado.png);
 }

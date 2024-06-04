@@ -8,35 +8,181 @@
   <link rel="stylesheet" href="/styles.css">
   <script src="javascript.js"></script>
   <style>
-    .dropdown {
-      position: relative;
-      display: inline-block;
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .cabecera {
+          position: fixed;
+          z-index: 5;
+          width: 100%;
+        }
+
+        .search-container {
+            width: 100%;
+            background-image: url('/imagenes-pincipales/fondologo.png');
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+
+        }
+
+        .search-form {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .search-form input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            outline: none;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        .search-form input[type="text"]:focus {
+            border-color: #a4cc54 ;
+        }
+
+        .search-form button {
+            width: 20%;
+            padding: 10px;
+            background-color: #a4cc54 ;
+            color: black ;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 0 8px 8px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-form button:hover {
+            background-color:  #a4c85c;
+        }
+
+        .barra-de-navegacion {
+            width: 100%;
+            background-image: url('/imagenes-pincipales/fondologo.png');
+            position: relative; /* No fixed, so it will move with scroll */
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .barra-de-navegacion .navegacion {
+            display: flex;
+            align-items: center;
+        }
+
+        .barra-de-navegacion .navegacion a {
+            color: rgb(7, 7, 7);
+            text-decoration: none;
+            padding: 10px 15px;
+        }
+
+        .barra-de-navegacion .navegacion a:hover {
+            background-color:  #a4c85c;
+            border-radius: 5px;
+        }
+
+        .barra-de-navegacion img {
+            height: 60px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+    .dropdown-content {
+      right: 0;
     }
 
     .dropdown-content {
       right: 0;
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      padding: 12px 16px;
-      z-index: 1;
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px #a4cc54 ;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .content {
+            padding-top: 130px; /* Altura suficiente para compensar la barra de búsqueda fija */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .p-3{
+          margin: 0%;
+        }
+        .bienvenida {
+        text-align: center;
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 50px;
     }
 
-    .dropdown:hover .dropdown-content {
-      display: block;
+    .boton-adoptar {
+        text-align: center;
+        padding: 10px 20px;
+        background-color:  #a4cc54;
+        color: black;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+        width: 150px;
     }
 
-    .p-3 {
-      margin: 1rem;
+    .boton-adoptar:hover {
+        background-color:  #a4c85c ;
     }
   </style>
 </head>
 
 <body>
-  <div class="cont">
     <!--NAVEGACION-->
+    <div class="cabecera">
     <div class="barra-de-navegacion">
       <div class="navegacion">
         <a href="/"><img src="imagenes-pincipales/APPDOTAME-sin-fondo-logo.png"></a>
@@ -58,22 +204,23 @@
           <a href="#sesion">Sesion</a>
           <div class="dropdown-content">
             <a class="p-3" href="/iniciosesion">Iniciar sesión</a>
-            <br>
-            <br>
             <a class="p-3" href="/registro">Registrarse</a>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  
 
   <!--BUSCADOR-->
-  <div class="search-container">
-    <form action="/buscar" method="get" class="search-form">
-      <input type="text" name="q" placeholder="Buscar..." />
-      <button type="submit">Buscar</button>
-    </form>
+  <div class="cont">
+    <div class="search-container">
+      <form action="/buscar" method="get" class="search-form">
+        <input type="text" name="q" placeholder="Buscar..." />
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
   </div>
+</div>
 
   <!--ADOPCION-->
   <div class="section-adoption">
@@ -102,7 +249,11 @@
             <div class="respuesta"><%= pet.ubicacion %></div>
           </div>
         </div>
-        <div class="boton-adoptar"><a href="/mascotas/<%= pet.nombre %>" class="boton" target="_blank">ADOPTAR</a></div>
+        <div class="boton-adoptar"><a href="/mascotas/<%= pet.nombre %>" class="boton-adoptar">ADOPTAR</a></div>
+        <% if (usuario && usuario.role === "admin") { %> 
+          <div class="boton-adoptar"><a href="/editar-mascota/<%= pet._id %>" class="boton-adoptar">EDITAR</a></div>
+          <div class="boton-adoptar"><a href="/eliminar-mascota/<%= pet._id %>" class="boton-adoptar">ELIMINAR</a></div>
+      <% } %>
       </div>
     </div>
     <% } %>
@@ -137,6 +288,6 @@
     </div>
   </div>
   </div>
-</body>
+  </body>
 
 </html>

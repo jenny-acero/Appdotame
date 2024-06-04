@@ -14,7 +14,7 @@ body {
     display: flex;
     width: 100%;
     font-weight: bold;
-    font-size: large;
+    
     color: rgba(0, 0, 0, 0.753);
 }
 
@@ -37,18 +37,16 @@ body {
 .search-container {
     background-image: url(imagenes-pincipales/fondologo.png);
     background-color: beige;
-    height: 100%;;
-    padding: 6%;
+    height: 100%;
+    padding: 17%;
+    justify-content: space-around;
 }
 
 .search-form {
-    display: flex;
+
     justify-content: center;
 }
 
-a {
-    margin: auto;
-}
 /*ADOPCION*/
 .section-adoption {
     width: 100%;
